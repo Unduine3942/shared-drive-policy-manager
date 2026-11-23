@@ -1,0 +1,117 @@
+{
+  "_comment": "Sample policy configuration for manual import / reference. All policies are disabled by default.",
+  "policies": [
+    {
+      "name": "Stale Files (>7 years)",
+      "description": "Flag files not modified in over 7 years.",
+      "severity": "LOW",
+      "is_active": false,
+      "rules": [
+        {
+          "field": "days_since_modified",
+          "operator": "gt",
+          "value": "2555",
+          "logic_group": 1
+        }
+      ]
+    },
+    {
+      "name": "Risky Executable Types",
+      "description": "Flag executable and script files that may pose a security risk.",
+      "severity": "HIGH",
+      "is_active": false,
+      "rules": [
+        {
+          "field": "extension",
+          "operator": "in",
+          "value": ".exe,.bat,.cmd,.ps1,.vbs,.js,.msi,.scr",
+          "logic_group": 1
+        }
+      ]
+    },
+    {
+      "name": "Personal Archives",
+      "description": "Flag compressed archives that may contain personal or unauthorised data.",
+      "severity": "MEDIUM",
+      "is_active": false,
+      "rules": [
+        {
+          "field": "extension",
+          "operator": "in",
+          "value": ".zip,.rar,.7z,.tar,.gz,.bz2",
+          "logic_group": 1
+        }
+      ]
+    },
+    {
+      "name": "Oversized Files (>5 GB)",
+      "description": "Flag individual files larger than 5 GB.",
+      "severity": "MEDIUM",
+      "is_active": false,
+      "rules": [
+        {
+          "field": "size_bytes",
+          "operator": "gt",
+          "value": "5368709120",
+          "logic_group": 1
+        }
+      ]
+    },
+    {
+      "name": "Temp / Copy Name Pattern",
+      "description": "Flag files whose names suggest they are temporary copies.",
+      "severity": "LOW",
+      "is_active": false,
+      "rules": [
+        {
+          "field": "name",
+          "operator": "regex",
+          "value": "(?i)(^copy\\s+of|~\\$|\\.tmp$|\\.bak$|_backup|\\.old$)",
+          "logic_group": 1
+        }
+      ]
+    },
+    {
+      "name": "Long Path (>240 chars)",
+      "description": "Flag files whose full path exceeds 240 characters.",
+      "severity": "MEDIUM",
+      "is_active": false,
+      "rules": [
+        {
+          "field": "path_length",
+          "operator": "gt",
+          "value": "240",
+          "logic_group": 1
+        }
+      ]
+    },
+    {
+      "name": "Unknown Owner",
+      "description": "Flag files where the owner SID could not be resolved to a domain account.",
+      "severity": "MEDIUM",
+      "is_active": false,
+      "rules": [
+        {
+          "field": "owner_name",
+          "operator": "is_empty",
+          "value": "",
+          "logic_group": 1
+        }
+      ]
+    },
+    {
+      "name": "Empty Files",
+      "description": "Flag zero-byte files.",
+      "severity": "LOW",
+      "is_active": false,
+      "rules": [
+        {
+          "field": "size_bytes",
+          "operator": "eq",
+          "value": "0",
+          "logic_group": 1
+        }
+      ]
+    }
+  ]
+}
